@@ -32,5 +32,4 @@ RUN mkdir -p /ComfyUI/custom_nodes/comfyui_controlnet_aux/ckpts/lllyasviel/Annot
     wget "https://huggingface.co/lllyasviel/Annotators/resolve/main/hand_pose_model.pth?download=true" -O /ComfyUI/custom_nodes/comfyui_controlnet_aux/ckpts/lllyasviel/Annotators/hand_pose_model.pth && \
     wget "https://huggingface.co/lllyasviel/Annotators/resolve/main/facenet.pth?download=true" -O /ComfyUI/custom_nodes/comfyui_controlnet_aux/ckpts/lllyasviel/Annotators/facenet.pth
 
-
 CMD [ "/start.sh" ]
