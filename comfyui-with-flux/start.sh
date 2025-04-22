@@ -48,4 +48,12 @@ if [ ! -f /ComfyUI/models/xlabs/loras/Xlabs-AI_flux-RealismLora.safetensors ]; t
 fi
 
 echo "🚀 Запуск ComfyUI..."
-exec /start-original.sh
+cd /ComfyUI
+
+# Установка зависимостей, если requirements.txt есть
+if [ -f requirements.txt ]; then
+  echo "📦 Установка зависимостей..."
+  pip install --no-cache-dir -r requirements.txt
+fi
+
+exec python3 main.py --listen
