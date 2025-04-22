@@ -4,7 +4,6 @@ echo "🔍 Поиск main.py и запуск ComfyUI..."
 
 POSSIBLE_PATHS=(
   "/ComfyUI/main.py"
-  "/comfyui/main.py"
 )
 
 FOUND=""
