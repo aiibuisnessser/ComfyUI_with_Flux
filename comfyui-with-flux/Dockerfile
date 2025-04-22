@@ -4,7 +4,7 @@ FROM valyriantech/comfyui-without-flux:latest
 ENV HF_TOKEN=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
 
 # Копируем стартовый скрипт
-COPY start.sh /start.sh
+COPY comfyui-with-flux/start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Запускаем кастомный entrypoint
