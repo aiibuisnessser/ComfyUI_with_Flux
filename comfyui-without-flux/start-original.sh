@@ -1,17 +1,34 @@
 #!/bin/bash
 
-# You can make modifications to this file if you want to customize the startup process.
-# Things like installing additional custom nodes, or downloading models can be done here.
+echo "🔍 Поиск main.py и запуск ComfyUI..."
 
-# Update the included workflows
-bash /update_Workflows.sh
+POSSIBLE_PATHS=(
+  "/comfyui/main.py"
+  "/workspace/ComfyUI/main.py"
+  "/ComfyUI/main.py"
+)
 
-# Disable Mixlab nodes because they take a long time load and are no longer needed in any of the included workflows.
-# But can be enabled if needed by commenting out the following line.
-bash /disable_mixlab.sh
+FOUND=""
 
-# Launch the UI
-python3 /workspace/ComfyUI/main.py --listen
+for path in "${POSSIBLE_PATHS[@]}"; do
+  if [ -f "$path" ]; then
+    FOUND="$path"
+    break
+  fi
+done
 
-# Keep the container running indefinitely
-sleep infinity
+if [ -z "$FOUND" ]; then
+  echo "❌ main.py не найден ни в одном из путей!"
+  echo "Проверенные пути:"
+  for path in "${POSSIBLE_PATHS[@]}"; do
+    echo " - $path"
+  done
+  exit 1
+fi
+
+DIR=$(dirname "$FOUND")
+echo "✅ Найден: $FOUND"
+echo "🚀 Запуск из директории $DIR"
+
+cd "$DIR"
+exec python3 main.py
