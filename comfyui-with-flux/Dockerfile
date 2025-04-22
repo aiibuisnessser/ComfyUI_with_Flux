@@ -1,11 +1,11 @@
 FROM valyriantech/comfyui-without-flux:latest
 
-# Hugging Face Token (передаётся через ENV или RunPod UI)
+# Hugging Face Token (для приватных моделей)
 ENV HF_TOKEN=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
 
 # Копируем стартовый скрипт
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
-# Запускаем его при старте контейнера
+# Запускаем кастомный entrypoint
 CMD ["/start.sh"]
