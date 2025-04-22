@@ -1,20 +1,20 @@
-FROM nvidia/cuda:12.2.0-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
 
 WORKDIR /workspace
 
-# Ставим зависимости
+# Установим системные зависимости
 RUN apt-get update && apt-get install -y \
     git python3 python3-pip python3-venv wget unzip && \
     rm -rf /var/lib/apt/lists/*
 
-# Копируем проект
+# Скопируем проект
 COPY . .
 
-# Устанавливаем Python зависимости
+# Установим зависимости Python
 RUN python3 -m venv venv && \
     . venv/bin/activate && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
-# Запускаем ComfyUI
+# Запуск
 CMD ["bash", "start.sh"]
