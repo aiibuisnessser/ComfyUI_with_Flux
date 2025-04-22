@@ -3,16 +3,8 @@ FROM valyriantech/comfyui-without-flux:latest
 # === Hugging Face Token (жестко вшит) ===
 ENV HF_TOKEN=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
 
-# === 🔐 Проверка токена (быстрый фейл, если невалидный) ===
-RUN echo "🧪 Проверка HuggingFace токена (GET-запрос)..." && \
-    wget --header="Authorization: Bearer ${HF_TOKEN}" \
-    --output-document=/dev/null \
-    "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors" || \
-    (echo "❌ Неверный HF_TOKEN или нет доступа к модели!" && exit 1)
-
-
-# === 🟣 FLUX: VAE ===
-RUN echo "⬇️ Скачивание FLUX VAE (ae.safetensors)..." && \
+# === 🔐 Проверка токена: качаем ae.safetensors первым ===
+RUN echo "🧪 Проверка HuggingFace токена (скачивание VAE)..." && \
     wget --progress=dot:giga --header="Authorization: Bearer ${HF_TOKEN}" \
     -O /ComfyUI/models/vae/ae.safetensors \
     "https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors?download=true"
