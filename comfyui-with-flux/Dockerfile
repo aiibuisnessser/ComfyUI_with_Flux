@@ -24,7 +24,7 @@ RUN wget -O /ComfyUI/models/xlabs/loras/Xlabs-AI_flux-RealismLora.safetensors "h
 # To include then in the docker image we need to download them manually and copy them to a folder called facerestore_models
 # I'm not sure where to download them from, I just copied them from and existing installation
 # Check if the directory exists and copy its contents if it does
-COPY facerestore_models /ComfyUI/models/facerestore_models/
+
 
 # make the directory for the openpose models and download the models needed
 RUN mkdir -p /ComfyUI/custom_nodes/comfyui_controlnet_aux/ckpts/lllyasviel/Annotators && \
